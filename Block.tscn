@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/block.png" type="Texture" id=1]
 [ext_resource path="res://Block.gd" type="Script" id=2]
@@ -10,6 +10,21 @@ extents = Vector2( 221.573, 111.005 )
 [sub_resource type="DynamicFont" id=2]
 size = 64
 font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "flash"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.701961, 0.121569, 0.913725, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Block" type="Area2D"]
 collision_mask = 2
@@ -34,6 +49,9 @@ custom_fonts/font = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/flash = SubResource( 3 )
 [connection signal="area_entered" from="." to="." method="snap"]
 [connection signal="area_exited" from="." to="." method="unsnap"]
 [connection signal="input_event" from="." to="." method="_on_Block_input_event"]

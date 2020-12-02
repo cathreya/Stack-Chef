@@ -7,9 +7,15 @@ signal dragoff;
 
 export var isOperator = false
 export var value = ""
+var current = false
 
 func update_text():
 	$IngText.text = value
+	if current:
+		$AnimationPlayer.get_animation("flash").set_loop(true)
+		$AnimationPlayer.play("flash")
+	else:
+		$AnimationPlayer.stop()
 	if isOperator:
 		$Sprite.modulate = Color(1.0, 0.5, 1.0)
 	else:
@@ -44,8 +50,9 @@ func _on_Block_input_event(viewport, event, shape_idx):
 			if snapped_to and snapped_to.name == "Trash":
 				self.queue_free()
 			elif snapped_to and not snapped_to.block_snapped:
-				self.position = snapped_to.global_position
-				snapped_to.block_snapped = self
+				if not snapped_to.get_parent().get("in_use") :
+					self.position = snapped_to.global_position
+					snapped_to.block_snapped = self
 			
 	elif event is InputEventScreenTouch:
 		if event.pressed and event.get_index()	 == 0:
@@ -53,13 +60,11 @@ func _on_Block_input_event(viewport, event, shape_idx):
 		
 
 func snap(body):
-	print("entered", body.name)
 	if snapped_to and snapped_to.name != "Trash" and snapped_to.block_snapped and snapped_to.block_snapped == self:
 		snapped_to.block_snapped = false
 	snapped_to = body
 
 func unsnap(body):
-	print("exited", body.name)
 	if snapped_to and snapped_to.name != "Trash" and snapped_to.block_snapped and snapped_to.block_snapped == self:
 		snapped_to.block_snapped = false
 		snapped_to = false
