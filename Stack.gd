@@ -3,8 +3,11 @@ extends Node2D
 
 var stack = []  
 var sceneClass = load("res://GridBlock.tscn")
+var ClockClass = load("res://Clock.tscn")
+var base_cook_time = 2
 
 func _ready():
+	$Clock.hide()
 	for i in range(10):
 		var scene = sceneClass.instance()
 		scene.set_name(str(i))
@@ -21,9 +24,22 @@ func snap(me,him):
 func out(me,him):
 	print(me.name, me.block_snapped)
 
+var ops = {
+	"Mix" : {
+		"Milk":{"Dry Ingredients": "Batter"}, 
+		"Flour":{"Baking Powder": "Flour+Baking Powder", "Sugar": "Sugar+Flour", "Sugar+Baking Powder": "Dry Ingredients"},
+		"Baking Powder":{"Flour": "Flour+Baking Powder", "Sugar": "Sugar+Baking Powder", "Sugar+Flour": "Dry Ingredients"},
+		"Sugar":{"Baking Powder": "Sugar+Baking Powder", "Flour": "Sugar+Flour", "Flour+Baking Powder": "Dry Ingredients"},	
+	},
+	"Bake" : {"Batter":"Cake"},
+	"Apply":{
+		"Cake":{"Frosting": "Frosted Cake"},
+		"Frosting":{"Cake": "Frosted Cake"}
+	}	
+}
 
-var mixtures = {"Milk":{"Flour": "Milk+Flour"}, "Flour":{"Milk": "Milk+Flour"}}
-func mix(st):
+
+func two_var_op(st, dict):
 	var ing1 = "Junk"
 	var ing2 = "Junk"
 	if not st.empty():
@@ -33,21 +49,39 @@ func mix(st):
 	if not st.empty():
 		ing2 = st.pop_back()
 	
-	if(mixtures.has(ing1) and mixtures[ing1].has(ing2)):
-		st.append(mixtures[ing1][ing2])	
+	if(dict.has(ing1) and dict[ing1].has(ing2)):
+		st.append(dict[ing1][ing2])	
 	else:
 		st.append("Junk")
 
-var optofunc = {"Mix": funcref(self,"mix")}
+func one_var_op(st, dict):
+	var ing1 = "Junk"
+	if not st.empty():
+		ing1 = st.pop_back()
+	if(ing1 in dict):
+		st.append(dict[ing1])	
+	else:
+		st.append("Junk")
+
+var v1op = funcref(self, "one_var_op")
+var v2op = funcref(self, "two_var_op")
+
+var optofunc = {"Mix": v2op, "Bake": v1op, "Apply":v2op }
 func _on_Button_pressed():
 	var st = []
 	for obj in stack:
 		if obj.block_snapped:
+			var val = obj.block_snapped.value
 			if obj.block_snapped.isOperator:
-				optofunc[obj.block_snapped.value].call_func(st)
+				optofunc[val].call_func(st, ops[val])
 			else:
-				st.append(obj.block_snapped.value)
+				st.append(val)
 	
+	
+	$Clock.show()
+	$Clock.start(base_cook_time)
+	yield(get_tree().create_timer(base_cook_time),"timeout")
+	$Clock.hide()
 	for obj in stack:
 		if obj.block_snapped:
 			if not st.empty():

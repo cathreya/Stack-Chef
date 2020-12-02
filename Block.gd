@@ -12,6 +12,8 @@ func update_text():
 	$IngText.text = value
 	if isOperator:
 		$Sprite.modulate = Color(1.0, 0.5, 1.0)
+	else:
+		$Sprite.modulate = Color(1.0, 1.0, 1.0)
 
 func _ready():
 	connect("dragon",self,"_set_drag_on")

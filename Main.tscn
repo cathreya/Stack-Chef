@@ -13,17 +13,44 @@ position = Vector2( 348.504, 578.254 )
 scale = Vector2( 0.25, 0.25 )
 
 [node name="SpawnBlock" parent="." instance=ExtResource( 2 )]
-position = Vector2( 673, 77 )
+position = Vector2( 518.03, 544.43 )
 scale = Vector2( 0.25, 0.25 )
 type = "Milk"
 
 [node name="SpawnBlock2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 673, 215 )
+position = Vector2( 519.29, 464.464 )
 scale = Vector2( 0.25, 0.25 )
 type = "Flour"
 
+[node name="SpawnBlock4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 660.401, 463.204 )
+scale = Vector2( 0.25, 0.25 )
+type = "Sugar"
+
+[node name="SpawnBlock5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 518.03, 388.869 )
+scale = Vector2( 0.25, 0.25 )
+type = "Baking Powder"
+
+[node name="SpawnBlock6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 662.921, 387.609 )
+scale = Vector2( 0.25, 0.25 )
+type = "Bake"
+isOperator = true
+
+[node name="SpawnBlock7" parent="." instance=ExtResource( 2 )]
+position = Vector2( 664.181, 317.054 )
+scale = Vector2( 0.25, 0.25 )
+type = "Apply"
+isOperator = true
+
+[node name="SpawnBlock8" parent="." instance=ExtResource( 2 )]
+position = Vector2( 516.77, 317.054 )
+scale = Vector2( 0.25, 0.25 )
+type = "Frosting"
+
 [node name="SpawnBlock3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 674, 355 )
+position = Vector2( 656.361, 542.728 )
 scale = Vector2( 0.25, 0.25 )
 type = "Mix"
 isOperator = true
@@ -33,4 +60,9 @@ position = Vector2( 115, 443 )
 scale = Vector2( 0.25, 0.25 )
 [connection signal="spawn" from="SpawnBlock" to="." method="_on_SpawnBlock_spawn"]
 [connection signal="spawn" from="SpawnBlock2" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="SpawnBlock4" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="SpawnBlock5" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="SpawnBlock6" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="SpawnBlock7" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="SpawnBlock8" to="." method="_on_SpawnBlock_spawn"]
 [connection signal="spawn" from="SpawnBlock3" to="." method="_on_SpawnBlock_spawn"]
