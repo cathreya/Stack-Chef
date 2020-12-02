@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/block.png" type="Texture" id=1]
+[ext_resource path="res://Block.gd" type="Script" id=2]
+[ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 221.573, 111.005 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = ExtResource( 3 )
+
+[node name="Block" type="Area2D"]
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1.5874, -1.5874 )
+shape = SubResource( 1 )
+
+[node name="IngText" type="Label" parent="."]
+margin_left = -84.1322
+margin_top = -46.0346
+margin_right = 86.8678
+margin_bottom = 112.965
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="area_entered" from="." to="." method="snap"]
+[connection signal="area_exited" from="." to="." method="unsnap"]
+[connection signal="input_event" from="." to="." method="_on_Block_input_event"]

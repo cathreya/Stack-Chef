@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Stack.tscn" type="PackedScene" id=1]
+[ext_resource path="res://SpawnBlock.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Main.gd" type="Script" id=3]
+[ext_resource path="res://TrashBlock.tscn" type="PackedScene" id=4]
+
+[node name="Level" type="Node"]
+script = ExtResource( 3 )
+
+[node name="Node" parent="." instance=ExtResource( 1 )]
+position = Vector2( 348.504, 578.254 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="SpawnBlock" parent="." instance=ExtResource( 2 )]
+position = Vector2( 673, 77 )
+scale = Vector2( 0.25, 0.25 )
+type = "Milk"
+
+[node name="SpawnBlock2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 673, 215 )
+scale = Vector2( 0.25, 0.25 )
+type = "Flour"
+
+[node name="SpawnBlock3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 674, 355 )
+scale = Vector2( 0.25, 0.25 )
+type = "Mix"
+isOperator = true
+
+[node name="Trash" parent="." instance=ExtResource( 4 )]
+position = Vector2( 115, 443 )
+scale = Vector2( 0.25, 0.25 )
+[connection signal="spawn" from="SpawnBlock" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="SpawnBlock2" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="SpawnBlock3" to="." method="_on_SpawnBlock_spawn"]
