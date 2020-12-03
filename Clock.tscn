@@ -50,7 +50,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.878431, 0.0862745, 0.0862745, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="Node2D" type="Node2D"]
+[node name="Clock" type="Node2D"]
 position = Vector2( -3.05176e-05, 1.52588e-05 )
 script = ExtResource( 2 )
 
