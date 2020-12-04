@@ -44,7 +44,7 @@ func draw_orders():
 		if list[i] == null:
 			continue
 		list[i].set_position(Vector2(0,400 + 600*i))
-		print(list[i].position)
+		#print(list[i].position)
 
 func add_order():
 	var order = OrderClass.instance()

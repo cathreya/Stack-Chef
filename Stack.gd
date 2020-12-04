@@ -4,6 +4,7 @@ extends Node2D
 var stack = []  
 var sceneClass = load("res://GridBlock.tscn")
 var ClockClass = load("res://Clock.tscn")
+var BlockClass = load("res://Block.tscn")
 var base_cook_time = 5
 var in_use = false
 
@@ -88,8 +89,9 @@ var v2op = funcref(self, "two_var_op")
 
 var optofunc = {"Mix": v2op, "Bake": v1op, "Apply":v2op }
 
-
-func _on_Button_pressed():
+var loop = false
+signal process_done
+func process():
 	in_use = true
 	var st = []
 	var bstk = []
@@ -111,3 +113,34 @@ func _on_Button_pressed():
 				bstk.append(obj)
 				
 	in_use = false
+	bstk[-1].block_snapped.position = $Dump.global_position
+	bstk[-1].block_snapped.position[1] -= randi()%20
+	emit_signal("process_done")
+
+func _on_Button_pressed():
+#	for _i in range(2):
+	while(loop):
+		var copy_ref = []
+		for obj in stack:
+			if obj.block_snapped:
+				var a = BlockClass.instance()
+				a.position = obj.block_snapped.position
+				a.value = obj.block_snapped.value
+				a.scale = obj.block_snapped.scale
+				a.isOperator = obj.block_snapped.isOperator
+				copy_ref.append(a)
+			else:
+				copy_ref.append(false)	
+		
+		process()
+		yield(self, "process_done")
+		for i in range(stack.size()):
+			if copy_ref[i]:
+				get_tree().get_root().get_node("Level").add_child(copy_ref[i])
+			stack[i].block_snapped = copy_ref[i]
+		
+	process()
+
+func _on_Button2_pressed():
+	loop = !loop
+	$Button2.modulate = Color(0,int(loop),1)

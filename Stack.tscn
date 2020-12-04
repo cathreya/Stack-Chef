@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Stack.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Clock.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/block.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -22,6 +23,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Button2" type="Button" parent="."]
+modulate = Color( 0, 0, 1, 1 )
+margin_left = -215.056
+margin_top = 59.4785
+margin_right = 217.944
+margin_bottom = 151.478
+custom_fonts/font = SubResource( 1 )
+text = "Toggle Loop"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Clock" parent="." instance=ExtResource( 3 )]
 position = Vector2( -339.722, -1.68178 )
+
+[node name="Dump" type="Sprite" parent="."]
+position = Vector2( -666.708, 0 )
+texture = ExtResource( 4 )
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]

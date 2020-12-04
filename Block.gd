@@ -25,9 +25,11 @@ func _ready():
 	connect("dragon",self,"_set_drag_on")
 	connect("dragoff",self,"_set_drag_off")
 	update_text()
-	
+
+var snapped_to = false
+
 func _process(delta):
-	if dragging:
+	if dragging and (not snapped_to or not snapped_to.get_parent().get("in_use")) :
 		#var mousepos = get_viewport().get_mouse_position()
 		var mousepos = get_global_mouse_position()
 		self.position = Vector2(mousepos.x, mousepos.y)
@@ -48,7 +50,6 @@ func reparent():
 	target.add_child(self)
 #	self.set_owner(target)
 
-var snapped_to = false
 func _on_Block_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if self.get_parent().name == "CanvasLayer":
@@ -82,7 +83,7 @@ func unsnap(body):
 #		reparent2()
 
 	if snapped_to and snapped_to == body:
-		if snapped_to.name != "Trash":
+		if snapped_to.name != "Trash" and snapped_to.block_snapped and snapped_to.block_snapped == self:
 			snapped_to.block_snapped = false
 		snapped_to = false
 
