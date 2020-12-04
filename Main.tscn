@@ -66,36 +66,63 @@ scale = Vector2( 0.25, 0.25 )
 type = "Flour"
 
 [node name="SpawnBlock4" parent="CanvasLayer" instance=ExtResource( 2 )]
-position = Vector2( 660.401, 463.204 )
+position = Vector2( 666.401, 539.204 )
 scale = Vector2( 0.25, 0.25 )
 type = "Sugar"
 
 [node name="SpawnBlock5" parent="CanvasLayer" instance=ExtResource( 2 )]
-position = Vector2( 518.03, 388.869 )
+position = Vector2( 666.03, 470.869 )
 scale = Vector2( 0.25, 0.25 )
 type = "Baking Powder"
 
+[node name="SpawnBlock11" parent="CanvasLayer" instance=ExtResource( 2 )]
+position = Vector2( 666.03, 396.869 )
+scale = Vector2( 0.25, 0.25 )
+type = "Chocolate"
+
+[node name="SpawnBlock12" parent="CanvasLayer" instance=ExtResource( 2 )]
+position = Vector2( 666.03, 330.869 )
+scale = Vector2( 0.25, 0.25 )
+type = "Fruits"
+
+[node name="SpawnBlock13" parent="CanvasLayer" instance=ExtResource( 2 )]
+position = Vector2( 522.03, 334.869 )
+scale = Vector2( 0.25, 0.25 )
+type = "Vanilla Essence"
+
 [node name="SpawnBlock6" parent="CanvasLayer" instance=ExtResource( 2 )]
-position = Vector2( 662.921, 387.609 )
+position = Vector2( 804.921, 409.609 )
 scale = Vector2( 0.25, 0.25 )
 type = "Bake"
 isOperator = true
 
 [node name="SpawnBlock7" parent="CanvasLayer" instance=ExtResource( 2 )]
-position = Vector2( 664.181, 317.054 )
+position = Vector2( 804.181, 337.054 )
 scale = Vector2( 0.25, 0.25 )
 type = "Apply"
 isOperator = true
 
+[node name="SpawnBlock10" parent="CanvasLayer" instance=ExtResource( 2 )]
+position = Vector2( 802.181, 271.054 )
+scale = Vector2( 0.25, 0.25 )
+type = "Chop"
+isOperator = true
+
 [node name="SpawnBlock8" parent="CanvasLayer" instance=ExtResource( 2 )]
-position = Vector2( 516.77, 317.054 )
+position = Vector2( 522.77, 397.054 )
 scale = Vector2( 0.25, 0.25 )
 type = "Frosting"
 
 [node name="SpawnBlock3" parent="CanvasLayer" instance=ExtResource( 2 )]
-position = Vector2( 656.361, 542.728 )
+position = Vector2( 808.361, 480.728 )
 scale = Vector2( 0.25, 0.25 )
 type = "Mix"
+isOperator = true
+
+[node name="SpawnBlock9" parent="CanvasLayer" instance=ExtResource( 2 )]
+position = Vector2( 806.361, 544.728 )
+scale = Vector2( 0.25, 0.25 )
+type = "Blend"
 isOperator = true
 
 [node name="Trash" parent="CanvasLayer" instance=ExtResource( 4 )]
@@ -113,7 +140,12 @@ star3thresh = 300
 [connection signal="spawn" from="CanvasLayer/SpawnBlock2" to="." method="_on_SpawnBlock_spawn"]
 [connection signal="spawn" from="CanvasLayer/SpawnBlock4" to="." method="_on_SpawnBlock_spawn"]
 [connection signal="spawn" from="CanvasLayer/SpawnBlock5" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="CanvasLayer/SpawnBlock11" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="CanvasLayer/SpawnBlock12" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="CanvasLayer/SpawnBlock13" to="." method="_on_SpawnBlock_spawn"]
 [connection signal="spawn" from="CanvasLayer/SpawnBlock6" to="." method="_on_SpawnBlock_spawn"]
 [connection signal="spawn" from="CanvasLayer/SpawnBlock7" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="CanvasLayer/SpawnBlock10" to="." method="_on_SpawnBlock_spawn"]
 [connection signal="spawn" from="CanvasLayer/SpawnBlock8" to="." method="_on_SpawnBlock_spawn"]
 [connection signal="spawn" from="CanvasLayer/SpawnBlock3" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="CanvasLayer/SpawnBlock9" to="." method="_on_SpawnBlock_spawn"]
