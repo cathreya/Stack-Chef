@@ -22,3 +22,7 @@ func _on_Button_pressed():
 
 func _on_Button2_pressed():
 	$Cam1.current = true
+
+
+func _on_OrderList_level_over(score):
+	$EndScreen.show(score)

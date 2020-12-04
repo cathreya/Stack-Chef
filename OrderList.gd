@@ -13,7 +13,7 @@ export var interval_high = 0
 export var order_count = 0
 
 var score = 0
-
+signal level_over(score)
 func draw_score():
 	$Score_Label.text = "SCORE: " + str(score)
 
@@ -62,5 +62,7 @@ func _ready():
 		add_order()
 		var wait_time = interval_low + randi()%(interval_high - interval_low)
 		yield(get_tree().create_timer(wait_time),"timeout")
-		
+	
+	yield(get_tree().create_timer(time_high),"timeout")
+	emit_signal("level_over",score)
 	

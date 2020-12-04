@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Stack.tscn" type="PackedScene" id=1]
 [ext_resource path="res://SpawnBlock.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://TrashBlock.tscn" type="PackedScene" id=4]
 [ext_resource path="res://OrderList.tscn" type="PackedScene" id=5]
 [ext_resource path="res://CanvasLayer.gd" type="Script" id=6]
+[ext_resource path="res://EndScreen.tscn" type="PackedScene" id=7]
 
 [node name="Level" type="Node"]
 script = ExtResource( 3 )
@@ -52,7 +53,7 @@ time_low = 7
 time_high = 15
 interval_low = 5
 interval_high = 10
-order_count = 10
+order_count = 3
 
 [node name="SpawnBlock" parent="CanvasLayer" instance=ExtResource( 2 )]
 position = Vector2( 518.03, 544.43 )
@@ -100,8 +101,14 @@ isOperator = true
 [node name="Trash" parent="CanvasLayer" instance=ExtResource( 4 )]
 position = Vector2( 115, 443 )
 scale = Vector2( 0.25, 0.25 )
+
+[node name="EndScreen" parent="." instance=ExtResource( 7 )]
+star1thresh = 100
+star2thresh = 200
+star3thresh = 300
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]
+[connection signal="level_over" from="CanvasLayer/OrderList" to="." method="_on_OrderList_level_over"]
 [connection signal="spawn" from="CanvasLayer/SpawnBlock" to="." method="_on_SpawnBlock_spawn"]
 [connection signal="spawn" from="CanvasLayer/SpawnBlock2" to="." method="_on_SpawnBlock_spawn"]
 [connection signal="spawn" from="CanvasLayer/SpawnBlock4" to="." method="_on_SpawnBlock_spawn"]
