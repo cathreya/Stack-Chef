@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/block.png" type="Texture" id=1]
 [ext_resource path="res://Block.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/sounds/chess.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/chopping.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/blender.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 221.573, 111.005 )
@@ -53,6 +56,21 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/flash = SubResource( 3 )
+
+[node name="chess" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="chess2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+pitch_scale = 1.11
+
+[node name="blend" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+pitch_scale = 1.11
+
+[node name="chop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+pitch_scale = 1.11
 [connection signal="area_entered" from="." to="." method="snap"]
 [connection signal="area_exited" from="." to="." method="unsnap"]
 [connection signal="input_event" from="." to="." method="_on_Block_input_event"]

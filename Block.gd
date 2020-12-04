@@ -9,6 +9,8 @@ export var isOperator = false
 export var value = ""
 var current = false
 
+var sounds = {"Mix": $blend, "Chop":$chop}
+
 func update_text():
 	$IngText.text = value
 	if current:
@@ -35,10 +37,12 @@ func _process(delta):
 		self.position = Vector2(mousepos.x, mousepos.y)
 
 func _set_drag_on():
+	$chess.play()
 	if not get_parent().clicked:
 		dragging=true
 		get_parent().clicked = true
 func _set_drag_off():
+	$chess2.play()
 	if dragging:
 		get_parent().clicked = false
 	dragging=false
