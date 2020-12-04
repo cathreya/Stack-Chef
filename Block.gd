@@ -28,7 +28,8 @@ func _ready():
 	
 func _process(delta):
 	if dragging:
-		var mousepos = get_viewport().get_mouse_position()
+		#var mousepos = get_viewport().get_mouse_position()
+		var mousepos = get_global_mouse_position()
 		self.position = Vector2(mousepos.x, mousepos.y)
 
 func _set_drag_on():
@@ -40,22 +41,18 @@ func _set_drag_off():
 		get_parent().clicked = false
 	dragging=false
 
-func reparent1():
-	var target = get_tree().get_root()
+func reparent():
+	print("reparented")
+	var target = get_tree().get_root().get_node("Level")
 	self.get_parent().remove_child(self)
 	target.add_child(self)
 #	self.set_owner(target)
-
-func reparent2():
-	var target = get_tree().get_root().get_node("CanvasLayer")
-	self.get_parent().remove_child(self)
-	target.add_child(self)
-#	self.set_owner(target)
-
 
 var snapped_to = false
 func _on_Block_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
+		if self.get_parent().name == "CanvasLayer":
+			reparent()
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			emit_signal("dragon")
 		elif event.button_index == BUTTON_LEFT and !event.pressed:
@@ -66,7 +63,7 @@ func _on_Block_input_event(viewport, event, shape_idx):
 				if not snapped_to.get_parent().get("in_use") :
 					self.position = snapped_to.global_position
 					snapped_to.block_snapped = self
-					reparent1()
+					
 			
 	elif event is InputEventScreenTouch:
 		if event.pressed and event.get_index()	 == 0:
@@ -84,11 +81,10 @@ func unsnap(body):
 #		snapped_to = false
 #		reparent2()
 
-	if snapped_to and snapped_to.block_snapped == body:
+	if snapped_to and snapped_to == body:
 		if snapped_to.name != "Trash":
 			snapped_to.block_snapped = false
 		snapped_to = false
-		reparent2()
 
 
 

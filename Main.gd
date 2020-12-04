@@ -1,6 +1,6 @@
 extends Node
 
-
+var clicked = false
 var sceneClass = load("res://Block.tscn")
 
 func _ready():
