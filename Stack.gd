@@ -40,6 +40,14 @@ var ops = {
 	}	
 }
 
+func proc2op(dict, ing1, ing2):
+	if(dict.has(ing1) and dict[ing1].has(ing2)):
+		return dict[ing1][ing2]
+	elif (dict.has(ing2) and dict[ing2].has(ing1)):
+		return dict[ing2][ing1]
+	else:
+		return "Junk"
+
 func upd_bstk(bstk, val):
 	if bstk.empty():
 		return
@@ -64,12 +72,9 @@ func two_var_op(st, bstk, dict):
 	if not st.empty():
 		ing2 = st.pop_back()
 	
-	if(dict.has(ing1) and dict[ing1].has(ing2)):
-		st.append(dict[ing1][ing2])
-		upd_bstk(bstk,dict[ing1][ing2])
-	else:
-		st.append("Junk")
-		upd_bstk(bstk, "Junk")
+	var result = proc2op(dict, ing1, ing2)
+	st.append(result)
+	upd_bstk(bstk,result)
 
 func one_var_op(st, bstk, dict):
 	var ing1 = "Junk"
@@ -89,6 +94,8 @@ var v2op = funcref(self, "two_var_op")
 
 var optofunc = {"Mix": v2op, "Bake": v1op, "Apply":v2op }
 
+	
+
 var loop = false
 signal process_done
 func process():
@@ -97,6 +104,7 @@ func process():
 	var bstk = []
 	for obj in stack:
 		if obj.block_snapped:
+			print(st)
 			var val = obj.block_snapped.value
 			if obj.block_snapped.isOperator:
 				obj.block_snapped.current = true
