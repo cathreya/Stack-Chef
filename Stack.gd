@@ -9,7 +9,7 @@ var in_use = false
 
 func _ready():
 	$Clock.hide()
-	for i in range(10):
+	for i in range(20):
 		var scene = sceneClass.instance()
 		scene.set_name(str(i))
 		scene.set_position(Vector2(0,-190-240*i))

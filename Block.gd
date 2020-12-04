@@ -40,6 +40,19 @@ func _set_drag_off():
 		get_parent().clicked = false
 	dragging=false
 
+func reparent1():
+	var target = get_tree().get_root()
+	self.get_parent().remove_child(self)
+	target.add_child(self)
+#	self.set_owner(target)
+
+func reparent2():
+	var target = get_tree().get_root().get_node("CanvasLayer")
+	self.get_parent().remove_child(self)
+	target.add_child(self)
+#	self.set_owner(target)
+
+
 var snapped_to = false
 func _on_Block_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
@@ -53,6 +66,7 @@ func _on_Block_input_event(viewport, event, shape_idx):
 				if not snapped_to.get_parent().get("in_use") :
 					self.position = snapped_to.global_position
 					snapped_to.block_snapped = self
+					reparent1()
 			
 	elif event is InputEventScreenTouch:
 		if event.pressed and event.get_index()	 == 0:
@@ -65,9 +79,16 @@ func snap(body):
 	snapped_to = body
 
 func unsnap(body):
-	if snapped_to and snapped_to.name != "Trash" and snapped_to.block_snapped and snapped_to.block_snapped == self:
-		snapped_to.block_snapped = false
+#	if snapped_to and snapped_to.name != "Trash" and snapped_to.block_snapped and snapped_to.block_snapped == self:
+#		snapped_to.block_snapped = false
+#		snapped_to = false
+#		reparent2()
+
+	if snapped_to and snapped_to.block_snapped == body:
+		if snapped_to.name != "Trash":
+			snapped_to.block_snapped = false
 		snapped_to = false
+		reparent2()
 
 
 
