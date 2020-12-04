@@ -26,18 +26,28 @@ func snap(me,him):
 func out(me,him):
 	print(me.name, me.block_snapped)
 
-var ops = {
+var ops ={
 	"Mix" : {
-		"Milk":{"Dry Ingredients": "Batter"}, 
-		"Flour":{"Baking Powder": "Flour+Baking Powder", "Sugar": "Sugar+Flour", "Sugar+Baking Powder": "Dry Ingredients"},
-		"Baking Powder":{"Flour": "Flour+Baking Powder", "Sugar": "Sugar+Baking Powder", "Sugar+Flour": "Dry Ingredients"},
-		"Sugar":{"Baking Powder": "Sugar+Baking Powder", "Flour": "Sugar+Flour", "Flour+Baking Powder": "Dry Ingredients"},	
+		"Milk":{"Base Dry Mix": "Batter"},
+		"Base Dry Mix":{"Milk": "Batter"},
+		"Choco Chips":{"Batter": "Chocolate Batter"},
+		"Fruit Pulp":{"Batter": "Fruit Batter"},
+		"Vanilla Essence":{"Batter": "Vanilla Batter"},
+		"Batter":{"Choco Chips": "Chocolate Batter","Fruit Pulp": "Fruit Batter","Vanilla Essence": "Vanilla Batter"},
+		"Flour":{"Baking Powder": "Flour+Baking Powder", "Sugar": "Sugar+Flour", "Sugar+Baking Powder": "Base Dry Mix"},
+		"Baking Powder":{"Flour": "Flour+Baking Powder", "Sugar": "Sugar+Baking Powder", "Sugar+Flour": "Base Dry Mix"},
+		"Sugar":{"Baking Powder": "Sugar+Baking Powder", "Flour": "Sugar+Flour", "Flour+Baking Powder": "Base Dry Mix"},	
 	},
-	"Bake" : {"Batter":"Cake"},
+	"Bake" : {"Batter":"Cake", "Chocolate Batter": "Chocolate Cake", "Fruit Batter":"Fruit Cake", "Vanilla Batter":"Vanilla Cake"},
 	"Apply":{
 		"Cake":{"Frosting": "Frosted Cake"},
-		"Frosting":{"Cake": "Frosted Cake"}
-	}	
+		"Chocolate Cake":{"Frosting": "Frosted Chocolate Cake"},
+		"Fruit Cake":{"Frosting": "Frosted Fruit Cake"},
+		"Vanilla Cake":{"Frosting": "Frosted Vanilla Cake"},
+		"Frosting":{"Cake": "Frosted Cake","Chocolate Cake": "Frosted Chocolate Cake","Fruit Cake": "Frosted Fruit Cake","Vanilla Cake": "Frosted Vanilla Cake"}
+	},	
+	"Blend": {"Fruits": "Fruit Pulp"},
+	"Chop":{"Chocolate": "Choco Chips"}
 }
 
 func proc2op(dict, ing1, ing2):
@@ -92,7 +102,8 @@ func one_var_op(st, bstk, dict):
 var v1op = funcref(self, "one_var_op")
 var v2op = funcref(self, "two_var_op")
 
-var optofunc = {"Mix": v2op, "Bake": v1op, "Apply":v2op }
+var optofunc = {"Mix": v2op, "Bake": v1op, "Apply":v2op, "Blend":v1op, "Chop":v1op }
+var opt_time = {"Mix": 6, "Bake": 10, "Apply": 4, "Blend": 6, "Chop": 4}
 
 	
 
@@ -110,8 +121,8 @@ func process():
 				obj.block_snapped.current = true
 				obj.block_snapped.update_text()
 				$Clock.show()
-				$Clock.start(base_cook_time)
-				yield(get_tree().create_timer(base_cook_time),"timeout")
+				$Clock.start(opt_time[val])
+				yield(get_tree().create_timer(opt_time[val]),"timeout")
 				$Clock.hide()
 				optofunc[val].call_func(st, bstk, ops[val])
 				bstk.append(obj)
