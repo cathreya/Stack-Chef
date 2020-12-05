@@ -28,26 +28,26 @@ func out(me,him):
 
 var ops ={
 	"Mix" : {
-		"Milk":{"Base Dry Mix": "Batter"},
-		"Base Dry Mix":{"Milk": "Batter"},
+		"Flour":{"Sugar": "Sugar+Flour", "Salt": "Flour+Salt"},
+		"Sugar":{"Flour": "Sugar+Flour"},
+		"Milk":{"Sugar+Flour": "Batter"},
 		"Choco Chips":{"Batter": "Chocolate Batter"},
-		"Fruit Pulp":{"Batter": "Fruit Batter"},
-		"Vanilla Essence":{"Batter": "Vanilla Batter"},
-		"Batter":{"Choco Chips": "Chocolate Batter","Fruit Pulp": "Fruit Batter","Vanilla Essence": "Vanilla Batter"},
-		"Flour":{"Baking Powder": "Flour+Baking Powder", "Sugar": "Sugar+Flour", "Sugar+Baking Powder": "Base Dry Mix"},
-		"Baking Powder":{"Flour": "Flour+Baking Powder", "Sugar": "Sugar+Baking Powder", "Sugar+Flour": "Base Dry Mix"},
-		"Sugar":{"Baking Powder": "Sugar+Baking Powder", "Flour": "Sugar+Flour", "Flour+Baking Powder": "Base Dry Mix"},	
+		"Fruit Pulp":{"Batter": "Fruit Batter"},  
+		"Tomato":{"Garlic": "Tomato+Garlic"},          
 	},
-	"Bake" : {"Batter":"Cake", "Chocolate Batter": "Chocolate Cake", "Fruit Batter":"Fruit Cake", "Vanilla Batter":"Vanilla Cake"},
-	"Apply":{
-		"Cake":{"Frosting": "Frosted Cake"},
-		"Chocolate Cake":{"Frosting": "Frosted Chocolate Cake"},
-		"Fruit Cake":{"Frosting": "Frosted Fruit Cake"},
-		"Vanilla Cake":{"Frosting": "Frosted Vanilla Cake"},
-		"Frosting":{"Cake": "Frosted Cake","Chocolate Cake": "Frosted Chocolate Cake","Fruit Cake": "Frosted Fruit Cake","Vanilla Cake": "Frosted Vanilla Cake"}
-	},	
-	"Blend": {"Fruits": "Fruit Pulp"},
-	"Chop":{"Chocolate": "Choco Chips"}
+	"Bake" : {"Batter":"Cake", "Chocolate Batter": "Chocolate+Cake", "Fruit Batter":"Fruit+Cake", "Cheese+Crust": "Cheese Pizza", "Veg+Crust": "Veg Pizza" },
+	"Frosting":{ "Chocolate+Cake":"Chocolate Cake", "Fruit+Cake":"Fruit Cake" },
+	"Blend": {"Fruits": "Fruit Pulp", "Tomato+Garlic": "Sauce"},
+	"Chop":{"Chocolate": "Choco Chips", "Vegetables": "Veg Toppings"},
+	"Knead":{
+		"Flour+Salt":{"Oil": "Dough"}},
+	"Grate":{"Cheese": "Grated Cheese"},
+	"Garnish":{
+		"Dough": {"Sauce": "Crust"},
+		"Crust": {"Grated Cheese": "Cheese+Crust", "Veg Toppings": "Veg+Crust"},
+	}
+	
+	
 }
 
 func proc2op(dict, ing1, ing2):
@@ -102,8 +102,8 @@ func one_var_op(st, bstk, dict):
 var v1op = funcref(self, "one_var_op")
 var v2op = funcref(self, "two_var_op")
 
-var optofunc = {"Mix": v2op, "Bake": v1op, "Apply":v2op, "Blend":v1op, "Chop":v1op }
-var opt_time = {"Mix": 6, "Bake": 10, "Apply": 4, "Blend": 6, "Chop": 4}
+var optofunc = {"Mix": v2op, "Bake": v1op, "Apply":v2op, "Blend":v1op, "Chop":v1op, "Knead":v2op, "Grate":v1op, "Garnish":v2op }
+var opt_time = {"Mix": 6, "Bake": 10, "Apply": 4, "Blend": 6, "Chop": 4,"Knead":7, "Grate":3, "Garnish":3 }
 
 	
 
