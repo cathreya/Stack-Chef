@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Stack.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Clock.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/block.png" type="Texture" id=4]
+[ext_resource path="res://assets/dump_block.png" type="Texture" id=4]
+[ext_resource path="res://assets/stackbot.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -13,10 +14,10 @@ font_data = ExtResource( 2 )
 script = ExtResource( 1 )
 
 [node name="Button" type="Button" parent="."]
-margin_left = -140.49
-margin_top = -47.1793
-margin_right = 140.51
-margin_bottom = 44.8207
+margin_left = -476.624
+margin_top = -318.471
+margin_right = -195.624
+margin_bottom = -226.471
 custom_fonts/font = SubResource( 1 )
 text = "Process"
 __meta__ = {
@@ -25,10 +26,10 @@ __meta__ = {
 
 [node name="Button2" type="Button" parent="."]
 modulate = Color( 0, 0, 1, 1 )
-margin_left = -215.056
-margin_top = 59.4785
-margin_right = 217.944
-margin_bottom = 151.478
+margin_left = -623.009
+margin_top = -208.272
+margin_right = -190.009
+margin_bottom = -116.272
 custom_fonts/font = SubResource( 1 )
 text = "Toggle Loop"
 __meta__ = {
@@ -36,10 +37,16 @@ __meta__ = {
 }
 
 [node name="Clock" parent="." instance=ExtResource( 3 )]
-position = Vector2( -339.722, -1.68178 )
+position = Vector2( -317.03, -403.469 )
 
 [node name="Dump" type="Sprite" parent="."]
-position = Vector2( -666.708, 0 )
+position = Vector2( -276.965, 13.646 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.23745, 57.1916 )
+scale = Vector2( 1.87626, 1.87626 )
+texture = ExtResource( 5 )
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]

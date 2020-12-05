@@ -7,23 +7,26 @@ signal dragoff;
 
 export var isOperator = false
 export var value = ""
+
 var current = false
 
-var sounds = {"Mix": $blend, "Chop":$chop}
+var sounds
 
 func update_text():
-	$IngText.text = value
+	if not "+" in value:
+		$Sprite.set_animation(value)
+	else:
+		$Sprite.set_animation("Intermediate")
 	if current:
 		$AnimationPlayer.get_animation("flash").set_loop(true)
 		$AnimationPlayer.play("flash")
+#		sounds[value].play()
 	else:
 		$AnimationPlayer.stop()
-	if isOperator:
-		$Sprite.modulate = Color(1.0, 0.5, 1.0)
-	else:
-		$Sprite.modulate = Color(1.0, 1.0, 1.0)
 
 func _ready():
+	$Sprite.set_animation(value)
+	sounds = {"Mix": $blend, "Chop":$chop, "Blend":$blend, "Bake":$bake}
 	connect("dragon",self,"_set_drag_on")
 	connect("dragoff",self,"_set_drag_off")
 	update_text()

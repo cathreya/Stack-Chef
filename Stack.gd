@@ -8,46 +8,66 @@ var BlockClass = load("res://Block.tscn")
 var base_cook_time = 5
 var in_use = false
 
+signal first
+signal second
+signal third
+
+
 func _ready():
 	$Clock.hide()
-	for i in range(20):
+	for i in range(30):
 		var scene = sceneClass.instance()
 		scene.set_name(str(i))
-		scene.set_position(Vector2(0,-190-240*i))
+		scene.set_position(Vector2(0,-100-200*i))
 		stack.append(scene)
 		add_child(scene)	
 		scene.connect("enter_block", self, "snap")
 		scene.connect("exit_block", self, "out")
 
-	
+var fdone = false
+var sdone = false
+var tdone = false
 func snap(me,him):
-	print (me.name, me.block_snapped)
+	if not fdone:
+		emit_signal("first")
+		fdone = true
 
 func out(me,him):
 	print(me.name, me.block_snapped)
 
+#var ops ={
+#	"Mix" : {
+#		"Flour":{"Sugar": "Sugar+Flour"},
+#		"Sugar":{"Flour": "Sugar+Flour"},
+#		"Milk":{"Sugar+Flour": "Batter"},
+#		"Choco Chips":{"Batter": "Chocolate Batter"},
+#		"Fruit Pulp":{"Batter": "Fruit Batter"},			
+#	},
+#	"Bake" : {"Batter":"Cake", "Chocolate Batter": "Chocolate+Cake", "Fruit Batter":"Fruit+Cake"},
+#	"Frosting":{ "Chocolate+Cake":"Chocolate Cake", "Fruit+Cake":"Fruit Cake"},
+#	"Blend": {"Fruits": "Fruit Pulp"},
+#	"Chop":{"Chocolate": "Choco Chips"}
+#}
 var ops ={
 	"Mix" : {
-		"Milk":{"Base Dry Mix": "Batter"},
-		"Base Dry Mix":{"Milk": "Batter"},
+		"Flour":{"Sugar": "Sugar+Flour", "Salt": "Flour+Salt"},
+		"Sugar":{"Flour": "Sugar+Flour"},
+		"Milk":{"Sugar+Flour": "Batter"},
 		"Choco Chips":{"Batter": "Chocolate Batter"},
-		"Fruit Pulp":{"Batter": "Fruit Batter"},
-		"Vanilla Essence":{"Batter": "Vanilla Batter"},
-		"Batter":{"Choco Chips": "Chocolate Batter","Fruit Pulp": "Fruit Batter","Vanilla Essence": "Vanilla Batter"},
-		"Flour":{"Baking Powder": "Flour+Baking Powder", "Sugar": "Sugar+Flour", "Sugar+Baking Powder": "Base Dry Mix"},
-		"Baking Powder":{"Flour": "Flour+Baking Powder", "Sugar": "Sugar+Baking Powder", "Sugar+Flour": "Base Dry Mix"},
-		"Sugar":{"Baking Powder": "Sugar+Baking Powder", "Flour": "Sugar+Flour", "Flour+Baking Powder": "Base Dry Mix"},	
+		"Fruit Pulp":{"Batter": "Fruit Batter"},  
+		"Tomato":{"Garlic": "Tomato+Garlic"},          
 	},
-	"Bake" : {"Batter":"Cake", "Chocolate Batter": "Chocolate Cake", "Fruit Batter":"Fruit Cake", "Vanilla Batter":"Vanilla Cake"},
-	"Apply":{
-		"Cake":{"Frosting": "Frosted Cake"},
-		"Chocolate Cake":{"Frosting": "Frosted Chocolate Cake"},
-		"Fruit Cake":{"Frosting": "Frosted Fruit Cake"},
-		"Vanilla Cake":{"Frosting": "Frosted Vanilla Cake"},
-		"Frosting":{"Cake": "Frosted Cake","Chocolate Cake": "Frosted Chocolate Cake","Fruit Cake": "Frosted Fruit Cake","Vanilla Cake": "Frosted Vanilla Cake"}
-	},	
-	"Blend": {"Fruits": "Fruit Pulp"},
-	"Chop":{"Chocolate": "Choco Chips"}
+	"Bake" : {"Batter":"Cake", "Chocolate Batter": "Chocolate+Cake", "Fruit Batter":"Fruit+Cake", "Cheese+Crust": "Cheese Pizza", "Veg+Crust": "Veg Pizza" },
+	"Frosting":{ "Chocolate+Cake":"Chocolate Cake", "Fruit+Cake":"Fruit Cake" },
+	"Blend": {"Fruits": "Fruit Pulp", "Tomato+Garlic": "Sauce"},
+	"Chop":{"Chocolate": "Choco Chips", "Vegetables": "Veg Toppings"},
+	"Knead":{
+		"Flour+Salt":{"Oil": "Dough"}},
+	"Grate":{"Cheese": "Grated Cheese"},
+	"Garnish":{
+		"Dough": {"Sauce": "Crust"},
+		"Crust": {"Grated Cheese": "Cheese+Crust", "Veg Toppings": "Veg+Crust"},
+	}
 }
 
 func proc2op(dict, ing1, ing2):
@@ -102,9 +122,13 @@ func one_var_op(st, bstk, dict):
 var v1op = funcref(self, "one_var_op")
 var v2op = funcref(self, "two_var_op")
 
-var optofunc = {"Mix": v2op, "Bake": v1op, "Apply":v2op, "Blend":v1op, "Chop":v1op }
-var opt_time = {"Mix": 6, "Bake": 10, "Apply": 4, "Blend": 6, "Chop": 4}
+#var optofunc = {"Mix": v2op, "Bake": v1op, "Frosting":v1op, "Blend":v1op, "Chop":v1op }
+#var opt_time = {"Mix": 2, "Bake": 3, "Frosting": 1, "Blend": 2, "Chop": 2}
 
+var optofunc = {"Mix": v2op, "Bake": v1op, "Apply":v2op, "Blend":v1op, "Chop":v1op, "Knead":v2op, "Grate":v1op, "Garnish":v2op }
+#var opt_time = {"Mix": 6, "Bake": 10, "Apply": 4, "Blend": 6, "Chop": 4,"Knead":7, "Grate":3, "Garnish":3 }
+var opt_time = {"Mix": 2, "Bake": 3, "Frosting": 1, "Blend": 2, "Chop": 2, "Knead":7, "Grate":3, "Garnish":3}
+var cooldown = 2
 	
 
 var loop = false
@@ -131,12 +155,23 @@ func process():
 				st.append(val)
 				bstk.append(obj)
 				
+	if not bstk.empty():
+		bstk[-1].block_snapped.position = $Dump.global_position
+		bstk[-1].block_snapped.position[1] -= randi()%20
+		bstk[-1].block_snapped = false
+		if st[-1] == "Sugar+Flour" and not sdone:
+			emit_signal("second")
+			sdone = true
+		if st[-1] == "Cake" and not tdone:
+			emit_signal("third")
+			tdone = true
 	in_use = false
-	bstk[-1].block_snapped.position = $Dump.global_position
-	bstk[-1].block_snapped.position[1] -= randi()%20
 	emit_signal("process_done")
 
 func _on_Button_pressed():
+	if in_use:
+		return
+	
 #	for _i in range(2):
 	while(loop):
 		var copy_ref = []
@@ -159,6 +194,11 @@ func _on_Button_pressed():
 			stack[i].block_snapped = copy_ref[i]
 		
 	process()
+	yield(self, "process_done")
+	$Clock.show()
+	$Clock.start(cooldown)
+	yield(get_tree().create_timer(cooldown),"timeout")
+	$Clock.hide()
 
 func _on_Button2_pressed():
 	loop = !loop

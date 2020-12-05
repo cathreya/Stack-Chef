@@ -1,0 +1,135 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/star-solid.svg" type="Texture" id=1]
+[ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://InfoBlock.gd" type="Script" id=3]
+[ext_resource path="res://assets/panel.png" type="Texture" id=4]
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 1024, 600 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 24
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "blink"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource( 3 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -360.5
+margin_top = -227.995
+margin_right = 360.5
+margin_bottom = 236.005
+custom_styles/panel = SubResource( 5 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel"]
+anchor_right = 1.0
+margin_left = 30.0
+margin_top = 25.0
+margin_right = -30.0
+margin_bottom = 101.0
+custom_fonts/font = SubResource( 2 )
+text = "Koi Keibayashi's pagoda of noodly delights"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Panel"]
+modulate = Color( 1, 1, 1, 0.428571 )
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -116.0
+custom_fonts/font = SubResource( 2 )
+text = "Press ENTER to play
+Press ESCAPE to go back"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="Panel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -189.451
+margin_top = 206.949
+margin_right = 581.549
+margin_bottom = 284.949
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 2 )
+text = "YOUR BEST SCORE: 0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="star1" type="Sprite" parent="Panel"]
+position = Vector2( 293.099, 160.228 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+
+[node name="star2" type="Sprite" parent="Panel"]
+position = Vector2( 359.324, 160.228 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+
+[node name="star3" type="Sprite" parent="Panel"]
+position = Vector2( 423.304, 160.228 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 38.9406
+margin_top = -222.0
+margin_right = -41.0594
+margin_bottom = -114.0
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[center]sdfsdfsdfsdfsdfsdfsdfdsfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf[/center]"
+text = "sdfsdfsdfsdfsdfsdfsdfdsfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel"]
+anims/blink = SubResource( 4 )
