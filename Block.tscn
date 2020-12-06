@@ -1,58 +1,50 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://assets/block.png" type="Texture" id=1]
+[ext_resource path="res://block_sprite.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Block.gd" type="Script" id=2]
-[ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/sounds/chess.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/chopping.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/blender.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/bake.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 221.573, 111.005 )
+extents = Vector2( 100.93, 99.8932 )
 
-[sub_resource type="DynamicFont" id=2]
-size = 64
-font_data = ExtResource( 3 )
-
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "flash"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.1, 0.5, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.701961, 0.121569, 0.913725, 1 ), Color( 1, 1, 1, 1 ) ]
-}
 
 [node name="Block" type="Area2D"]
 z_index = 1
 collision_mask = 2
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1.5874, -1.5874 )
+position = Vector2( -1.5874, 11.1118 )
 shape = SubResource( 1 )
 
-[node name="IngText" type="Label" parent="."]
-margin_left = -84.1322
-margin_top = -46.0346
-margin_right = 86.8678
-margin_bottom = 112.965
-custom_fonts/font = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/flash = SubResource( 3 )
+anims/flash = SubResource( 2 )
+
+[node name="chess" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="chess2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+pitch_scale = 1.11
+
+[node name="blend" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+pitch_scale = 1.11
+
+[node name="chop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+pitch_scale = 1.11
+
+[node name="bake" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+pitch_scale = 1.11
+
+[node name="Sprite" parent="." instance=ExtResource( 1 )]
 [connection signal="area_entered" from="." to="." method="snap"]
 [connection signal="area_exited" from="." to="." method="unsnap"]
 [connection signal="input_event" from="." to="." method="_on_Block_input_event"]

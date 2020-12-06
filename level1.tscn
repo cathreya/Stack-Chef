@@ -1,0 +1,261 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://Stack.tscn" type="PackedScene" id=1]
+[ext_resource path="res://SpawnBlock.tscn" type="PackedScene" id=2]
+[ext_resource path="res://level1.gd" type="Script" id=3]
+[ext_resource path="res://TrashBlock.tscn" type="PackedScene" id=4]
+[ext_resource path="res://OrderList.tscn" type="PackedScene" id=5]
+[ext_resource path="res://CanvasLayer.gd" type="Script" id=6]
+[ext_resource path="res://assets/bakery_bg.jpg.png" type="Texture" id=7]
+[ext_resource path="res://assets/bakery_bg2.png" type="Texture" id=8]
+[ext_resource path="res://assets/dump_block.png" type="Texture" id=9]
+[ext_resource path="res://assets/talking.png" type="Texture" id=10]
+[ext_resource path="res://assets/speech.png" type="Texture" id=11]
+[ext_resource path="res://chef.gd" type="Script" id=12]
+[ext_resource path="res://assets/fonts/seguibl.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://assets/gibberish.ogg" type="AudioStream" id=14]
+
+[sub_resource type="InputEventAction" id=1]
+action = "ui_up"
+
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
+
+[sub_resource type="InputEventAction" id=3]
+action = "ui_down"
+
+[sub_resource type="ShortCut" id=4]
+shortcut = SubResource( 3 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 0, 0, 197, 226 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 197, 0, 197, 226 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 394, 0, 197, 226 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 591, 0, 197, 226 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "talk",
+"speed": 10.0
+} ]
+
+[sub_resource type="DynamicFont" id=10]
+size = 32
+font_data = ExtResource( 13 )
+
+[sub_resource type="InputEventAction" id=11]
+action = "ui_accept"
+
+[sub_resource type="ShortCut" id=12]
+shortcut = SubResource( 11 )
+
+[node name="Level" type="Node"]
+script = ExtResource( 3 )
+
+[node name="Stack" parent="." instance=ExtResource( 1 )]
+position = Vector2( 339.685, 568.175 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="Cam2" type="Camera2D" parent="."]
+position = Vector2( 512.947, -304.404 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Cam1" type="Camera2D" parent="."]
+position = Vector2( 512.947, 302.878 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 23.9766
+margin_top = 22.7422
+margin_right = 52.9766
+margin_bottom = 42.7422
+shortcut = SubResource( 2 )
+text = "^"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="."]
+margin_left = 55.3492
+margin_top = -19.5206
+margin_right = 84.3492
+margin_bottom = 0.479389
+rect_rotation = 179.888
+shortcut = SubResource( 4 )
+text = "^"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource( 6 )
+
+[node name="OrderList" parent="CanvasLayer" instance=ExtResource( 5 )]
+position = Vector2( 931.733, 115.381 )
+scale = Vector2( 0.2, 0.2 )
+possible_dishes = [ "Cake", "Fruit Cake", "Chocolate Cake" ]
+time_low = 100
+time_high = 101
+interval_low = 100
+interval_high = 101
+order_count = 3
+tut = true
+
+[node name="SpawnBlock" parent="CanvasLayer" instance=ExtResource( 2 )]
+position = Vector2( 559.749, 202.897 )
+scale = Vector2( 0.25, 0.25 )
+type = "Milk"
+
+[node name="SpawnBlock2" parent="CanvasLayer" instance=ExtResource( 2 )]
+position = Vector2( 549.702, 361.934 )
+scale = Vector2( 0.25, 0.25 )
+type = "Flour"
+
+[node name="SpawnBlock5" parent="CanvasLayer" instance=ExtResource( 2 )]
+position = Vector2( 461.603, 506.097 )
+scale = Vector2( 0.25, 0.25 )
+type = "Chop"
+isOperator = true
+
+[node name="SpawnBlock7" parent="CanvasLayer" instance=ExtResource( 2 )]
+position = Vector2( 528.345, 504.762 )
+scale = Vector2( 0.25, 0.25 )
+type = "Blend"
+isOperator = true
+
+[node name="SpawnBlock9" parent="CanvasLayer" instance=ExtResource( 2 )]
+position = Vector2( 644.476, 508.766 )
+scale = Vector2( 0.25, 0.25 )
+type = "Fruit"
+
+[node name="SpawnBlock10" parent="CanvasLayer" instance=ExtResource( 2 )]
+position = Vector2( 589.748, 508.766 )
+scale = Vector2( 0.25, 0.25 )
+type = "Chocolate"
+
+[node name="SpawnBlock4" parent="CanvasLayer" instance=ExtResource( 2 )]
+position = Vector2( 640.602, 202.282 )
+scale = Vector2( 0.25, 0.25 )
+type = "Sugar"
+
+[node name="SpawnBlock6" parent="CanvasLayer" instance=ExtResource( 2 )]
+position = Vector2( 476.49, 360.739 )
+scale = Vector2( 0.25, 0.25 )
+type = "Bake"
+isOperator = true
+
+[node name="SpawnBlock8" parent="CanvasLayer" instance=ExtResource( 2 )]
+position = Vector2( 484.95, 203.838 )
+scale = Vector2( 0.25, 0.25 )
+type = "Frosting"
+isOperator = true
+
+[node name="SpawnBlock3" parent="CanvasLayer" instance=ExtResource( 2 )]
+position = Vector2( 622.189, 361.709 )
+scale = Vector2( 0.25, 0.25 )
+type = "Mix"
+isOperator = true
+
+[node name="Trash" parent="CanvasLayer" instance=ExtResource( 4 )]
+position = Vector2( 105.108, 532.481 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="chef" type="AnimatedSprite" parent="CanvasLayer"]
+position = Vector2( 136.158, 156.761 )
+z_index = 4
+frames = SubResource( 9 )
+animation = "talk"
+script = ExtResource( 12 )
+
+[node name="chefbg" type="Sprite" parent="CanvasLayer/chef"]
+position = Vector2( 7.86613, 5.61865 )
+scale = Vector2( 1.62885, 1.62885 )
+z_index = -1
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="bubble" type="Sprite" parent="CanvasLayer/chef"]
+position = Vector2( 395.785, 192.989 )
+scale = Vector2( 0.848037, 0.821044 )
+texture = ExtResource( 11 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/chef/bubble"]
+margin_left = -182.0
+margin_top = -184.0
+margin_right = 229.0
+margin_bottom = 226.0
+custom_fonts/normal_font = SubResource( 10 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Enter" type="Button" parent="CanvasLayer/chef"]
+margin_left = -158.571
+margin_top = -8.49487
+margin_right = -146.571
+margin_bottom = 11.5051
+shortcut = SubResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/chef"]
+stream = ExtResource( 14 )
+
+[node name="bg" type="Sprite" parent="."]
+position = Vector2( 512, 300 )
+z_index = -1
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="bg2" type="Sprite" parent="."]
+position = Vector2( 512, -307 )
+z_index = -1
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+[connection signal="first" from="Stack" to="." method="progress_tut"]
+[connection signal="second" from="Stack" to="." method="progress_tut"]
+[connection signal="third" from="Stack" to="." method="progress_tut"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]
+[connection signal="fourth" from="CanvasLayer/OrderList" to="." method="progress_tut"]
+[connection signal="level_over" from="CanvasLayer/OrderList" to="." method="_on_OrderList_level_over"]
+[connection signal="spawn" from="CanvasLayer/SpawnBlock" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="CanvasLayer/SpawnBlock2" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="CanvasLayer/SpawnBlock5" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="CanvasLayer/SpawnBlock7" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="CanvasLayer/SpawnBlock9" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="CanvasLayer/SpawnBlock10" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="CanvasLayer/SpawnBlock4" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="CanvasLayer/SpawnBlock6" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="CanvasLayer/SpawnBlock8" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="spawn" from="CanvasLayer/SpawnBlock3" to="." method="_on_SpawnBlock_spawn"]
+[connection signal="pressed" from="CanvasLayer/chef/Enter" to="CanvasLayer/chef" method="_on_Enter_pressed"]

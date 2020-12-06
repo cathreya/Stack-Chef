@@ -1,0 +1,319 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://assets/pixelated_map2.png" type="Texture" id=1]
+[ext_resource path="res://assets/path.png" type="Texture" id=2]
+[ext_resource path="res://assets/player_sprite.png" type="Texture" id=3]
+[ext_resource path="res://Overworld2.gd" type="Script" id=4]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -2.15465, 11.0202, 0, 0, 0, 0, 30.8848, 4.59587, 0, 0, 0, 0, 43.7335, 42.2242, 0, 0, 0, 0, 44.6513, 61.4972, 0, 0, 0, 0, 59.3355, 70.6748, 0, 0, 0, 0, 87.7861, 77.0991, 0, 0, 0, 0, 87.7861, 94.5366, 0, 0, 0, 0, 67.5953, 109.221, 0, 0, 0, 0, 46.4868, 130.329, 0, 0, 0, 0, 13.4473, 149.602, 0, 0, 0, 0, 47.9942, 149.811, 0, 0, 0, 0, 46.9015, 166.565, 0, 0, 0, 0, 43.6236, 184.776, 0, 0, 0, 0, 43.9878, 210.635, 0, 0, 0, 0, 47.9942, 234.309, 0, 0, 0, 0, 57.828, 263.082, 0, 0, 0, 0, 78.224, 282.749, 0, 0, 0, 0, 94.9778, 292.583, 0, 0, 0, 0, 152.689, 319.284, 0, 0, 0, 0, 165.409, 326.847, 0, 0, 0, 0, 188.098, 334.066, 0, 0, 0, 0, 200.13, 343.692, 0, 0, 0, 0, 189.473, 354.349, 0, 0, 0, 0, 180.535, 359.849, 0, 0, 0, 0, 165.752, 372.569, 0, 0, 0, 0, 161.627, 384.601, 0, 0, 0, 0, 171.253, 403.165, 0, 0, 0, 0, 192.223, 415.884, 0, 0, 0, 0, 204.255, 424.479, 0, 0, 0, 0, 218.006, 472.607, 0, 0, 0, 0, 220.068, 485.67, 0, 0, 0, 0, 224.194, 508.703, 0, 0, 0, 0, 229.007, 523.485, 0, 0, 0, 0, 240.007, 524.516, 0, 0, 0, 0, 247.914, 511.797, 0, 0, 0, 0, 247.57, 489.795, 0, 0, 0, 0, 249.977, 482.92, 0, 0, 0, 0, 281.948, 473.294, 0, 0, 0, 0, 296.042, 471.232, 0, 0, 0, 0, 312.543, 450.262, 0, 0, 0, 0, 341.42, 405.915, 0, 0, 0, 0, 360.328, 370.506, 0, 0, 0, 0, 397.111, 300.377, 0, 0, 0, 0, 434.583, 279.406, 0, 0, 0, 0, 463.459, 276.656, 0, 0, 0, 0, 486.492, 286.282, 0, 0, 0, 0, 503.681, 299.689, 0, 0, 0, 0, 530.151, 311.721, 0, 0, 0, 0, 539.089, 314.471, 0, 0, 0, 0, 563.154, 347.13, 0, 0, 0, 0, 574.842, 351.599, 0, 0, 0, 0, 579.311, 349.88, 0, 0, 0, 0, 581.374, 324.784, 0, 0, 0, 0, 582.405, 311.721, 0, 0, 0, 0, 623.658, 295.908, 0, 0, 0, 0, 648.753, 261.874, 0, 0, 0, 0, 657.691, 235.06, 0, 0, 0, 0, 659.066, 192.432, 0, 0, 0, 0, 635.002, 149.46, 0, 0, 0, 0, 622.613, 124.316, 0, 0, 0, 0, 607.156, 111.302, 0, 0, 0, 0, 590.999, 97.5508, 0, 0, 0, 0, 573.123, 93.7692, 0, 0, 0, 0, 586.186, 81.7372, 0, 0, 0, 0, 606.125, 75.5493, 0, 0, 0, 0, 631.908, 87.5813, 0, 0, 0, 0, 657.691, 96.8632, 0, 0, 0, 0, 681.411, 97.207, 0, 0, 0, 0, 715.101, 80.3621, 0, 0, 0, 0, 735.384, 50.7977, 0, 0, 0, 0, 775.605, 20.5457, 0, 0, 0, 0, 804.138, 26.3898, 0, 0, 0, 0, 823.39, 37.0468, 0, 0, 0, 0, 826.827, 71.0802, 0, 0, 0, 0, 833.703, 122.99, 0, 0, 0, 0, 856.392, 150.492, 0, 0, 0, 0, 901.77, 163.555 )
+}
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 288, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 320, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 352, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 288, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 320, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 352, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 288, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 320, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 352, 64, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"loop": true,
+"name": "back",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=9]
+resource_name = "1"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Path2D/PathFollow2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 230.64 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PlayerCam:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -984.908, -583.858 ), Vector2( -951.908, -330.858 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "2"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Path2D/PathFollow2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 230.0, 800.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PlayerCam:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -951.908, -330.858 ), Vector2( -674, 280 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "3"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Path2D/PathFollow2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 800.0, 1300.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PlayerCam:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -674, 280 ), Vector2( -62, -120 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "4"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Path2D/PathFollow2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1300.0, 1600.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PlayerCam:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -62, -120 ), Vector2( 43, -556 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "5"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Path2D/PathFollow2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1600.0, 2070.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PlayerCam:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 43, -556 ), Vector2( 762, -391 ) ]
+}
+
+[sub_resource type="InputEventAction" id=21]
+action = "ui_accept"
+
+[sub_resource type="ShortCut" id=22]
+shortcut = SubResource( 21 )
+
+[sub_resource type="InputEventAction" id=14]
+action = "ui_right"
+
+[sub_resource type="ShortCut" id=15]
+shortcut = SubResource( 14 )
+
+[sub_resource type="InputEventAction" id=16]
+action = "ui_left"
+
+[sub_resource type="ShortCut" id=17]
+shortcut = SubResource( 16 )
+
+[sub_resource type="InputEventAction" id=23]
+action = "ui_cancel"
+
+[sub_resource type="ShortCut" id=24]
+shortcut = SubResource( 23 )
+
+[node name="Sprite" type="Sprite"]
+position = Vector2( 774.379, 453.669 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="PlayerCam" type="Camera2D" parent="Node2D"]
+position = Vector2( -958.508, -381.458 )
+scale = Vector2( 0.1, 0.1 )
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="Path2D" type="Path2D" parent="Node2D"]
+position = Vector2( -1290.06, -719.353 )
+scale = Vector2( 2.17921, 2.17921 )
+curve = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Node2D/Path2D"]
+position = Vector2( 62.6361, 114.179 )
+rotation = 2.35604
+offset = 184.712
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Node2D/Path2D/PathFollow2D"]
+z_index = 1
+frames = SubResource( 8 )
+animation = "back"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D"]
+anims/1 = SubResource( 9 )
+anims/2 = SubResource( 10 )
+anims/3 = SubResource( 11 )
+anims/4 = SubResource( 12 )
+anims/5 = SubResource( 13 )
+
+[node name="Path" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Enter" type="Button" parent="."]
+margin_right = 12.0
+margin_bottom = 20.0
+shortcut = SubResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="Button" parent="."]
+margin_right = 12.0
+margin_bottom = 20.0
+shortcut = SubResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="Button" parent="."]
+margin_right = 12.0
+margin_bottom = 20.0
+shortcut = SubResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Escape" type="Button" parent="."]
+margin_right = 12.0
+margin_bottom = 20.0
+shortcut = SubResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Enter" to="." method="_on_Enter_pressed"]
+[connection signal="pressed" from="Right" to="." method="_on_Right_pressed"]
+[connection signal="pressed" from="Left" to="." method="_on_Left_pressed"]
+[connection signal="pressed" from="Escape" to="." method="_on_Escape_pressed"]
