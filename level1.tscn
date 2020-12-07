@@ -114,10 +114,10 @@ script = ExtResource( 6 )
 position = Vector2( 931.733, 115.381 )
 scale = Vector2( 0.2, 0.2 )
 possible_dishes = [ "Cake", "Fruit Cake", "Chocolate Cake" ]
-time_low = 100
-time_high = 101
-interval_low = 100
-interval_high = 101
+time_low = 25
+time_high = 45
+interval_low = 15
+interval_high = 20
 order_count = 3
 tut = true
 

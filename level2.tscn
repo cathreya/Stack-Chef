@@ -30,66 +30,66 @@ shortcut = SubResource( 3 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
-atlas = ExtResource( 10 )
+atlas = ExtResource( 14 )
 region = Rect2( 0, 0, 197, 226 )
 
 [sub_resource type="AtlasTexture" id=6]
 flags = 4
-atlas = ExtResource( 10 )
+atlas = ExtResource( 14 )
 region = Rect2( 197, 0, 197, 226 )
 
 [sub_resource type="AtlasTexture" id=7]
 flags = 4
-atlas = ExtResource( 10 )
+atlas = ExtResource( 14 )
 region = Rect2( 394, 0, 197, 226 )
 
 [sub_resource type="AtlasTexture" id=8]
 flags = 4
+atlas = ExtResource( 14 )
+region = Rect2( 591, 0, 197, 226 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 0, 0, 197, 226 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 197, 0, 197, 226 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 394, 0, 197, 226 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
 atlas = ExtResource( 10 )
 region = Rect2( 591, 0, 197, 226 )
 
-[sub_resource type="AtlasTexture" id=13]
-flags = 4
-atlas = ExtResource( 14 )
-region = Rect2( 0, 0, 197, 226 )
-
-[sub_resource type="AtlasTexture" id=14]
-flags = 4
-atlas = ExtResource( 14 )
-region = Rect2( 197, 0, 197, 226 )
-
-[sub_resource type="AtlasTexture" id=15]
-flags = 4
-atlas = ExtResource( 14 )
-region = Rect2( 394, 0, 197, 226 )
-
-[sub_resource type="AtlasTexture" id=16]
-flags = 4
-atlas = ExtResource( 14 )
-region = Rect2( 591, 0, 197, 226 )
-
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="SpriteFrames" id=13]
 animations = [ {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
-"name": "talk",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
-"loop": true,
 "name": "talk2",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "talk",
+"speed": 10.0
 } ]
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=14]
 size = 32
 font_data = ExtResource( 13 )
 
-[sub_resource type="InputEventAction" id=11]
+[sub_resource type="InputEventAction" id=15]
 action = "ui_accept"
 
-[sub_resource type="ShortCut" id=12]
-shortcut = SubResource( 11 )
+[sub_resource type="ShortCut" id=16]
+shortcut = SubResource( 15 )
 
 [node name="Level" type="Node"]
 script = ExtResource( 3 )
@@ -150,9 +150,9 @@ scale = Vector2( 0.2, 0.2 )
 possible_dishes = [ "Cheese Pizza", "Veg Pizza" ]
 time_low = 30
 time_high = 50
-interval_low = 100
-interval_high = 101
-order_count = 10
+interval_low = 40
+interval_high = 45
+order_count = 5
 
 [node name="SpawnBlock" parent="CanvasLayer" instance=ExtResource( 2 )]
 position = Vector2( 522.445, 206.072 )
@@ -260,7 +260,7 @@ scale = Vector2( 0.25, 0.25 )
 visible = false
 position = Vector2( 136.158, 156.761 )
 z_index = 4
-frames = SubResource( 9 )
+frames = SubResource( 13 )
 animation = "talk2"
 script = ExtResource( 12 )
 
@@ -283,7 +283,7 @@ margin_left = -182.0
 margin_top = -184.0
 margin_right = 229.0
 margin_bottom = 226.0
-custom_fonts/normal_font = SubResource( 10 )
+custom_fonts/normal_font = SubResource( 14 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
 __meta__ = {
@@ -295,7 +295,7 @@ margin_left = -158.571
 margin_top = -8.49487
 margin_right = -146.571
 margin_bottom = 11.5051
-shortcut = SubResource( 12 )
+shortcut = SubResource( 16 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

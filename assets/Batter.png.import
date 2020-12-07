@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Batter.png-2d2fe80400fa8c609d4e278a5a711412.stex"
+path="res://.import/batter.png-52805b74aba190d9b6bcfa67c426656f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Batter.png"
-dest_files=[ "res://.import/Batter.png-2d2fe80400fa8c609d4e278a5a711412.stex" ]
+source_file="res://assets/batter.png"
+dest_files=[ "res://.import/batter.png-52805b74aba190d9b6bcfa67c426656f.stex" ]
 
 [params]
 

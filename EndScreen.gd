@@ -23,8 +23,8 @@ func draw():
 	if(score >= star2thresh):
 		$Panel/star2.set_modulate(gold)
 		stars += 1
-	if(score >= star2thresh):
-		$Panel/star2.set_modulate(gold)
+	if(score >= star3thresh):
+		$Panel/star3.set_modulate(gold)
 		stars += 1
 	
 

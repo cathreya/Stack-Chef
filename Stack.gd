@@ -125,9 +125,9 @@ var v2op = funcref(self, "two_var_op")
 #var optofunc = {"Mix": v2op, "Bake": v1op, "Frosting":v1op, "Blend":v1op, "Chop":v1op }
 #var opt_time = {"Mix": 2, "Bake": 3, "Frosting": 1, "Blend": 2, "Chop": 2}
 
-var optofunc = {"Mix": v2op, "Bake": v1op, "Apply":v2op, "Blend":v1op, "Chop":v1op, "Knead":v2op, "Grate":v1op, "Garnish":v2op }
+var optofunc = {"Mix": v2op, "Bake": v1op, "Frosting":v1op, "Apply":v2op, "Blend":v1op, "Chop":v1op, "Knead":v2op, "Grate":v1op, "Garnish":v2op }
 #var opt_time = {"Mix": 6, "Bake": 10, "Apply": 4, "Blend": 6, "Chop": 4,"Knead":7, "Grate":3, "Garnish":3 }
-var opt_time = {"Mix": 2, "Bake": 3, "Frosting": 1, "Blend": 2, "Chop": 2, "Knead":7, "Grate":3, "Garnish":3}
+var opt_time = {"Mix": 2, "Bake": 3, "Frosting": 1, "Apply":3, "Blend": 2, "Chop": 2, "Knead":5, "Grate":3, "Garnish":3}
 var cooldown = 2
 	
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Frosting.png-7a3e0fb6c3f3519b6b85c4af581118d5.stex"
+path="res://.import/frosting.png-3ce01bb37c15238d7f1e5b7166d0c35f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Frosting.png"
-dest_files=[ "res://.import/Frosting.png-7a3e0fb6c3f3519b6b85c4af581118d5.stex" ]
+source_file="res://assets/frosting.png"
+dest_files=[ "res://.import/frosting.png-3ce01bb37c15238d7f1e5b7166d0c35f.stex" ]
 
 [params]
 

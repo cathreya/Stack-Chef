@@ -5,7 +5,7 @@
 [ext_resource path="res://InfoBlock.gd" type="Script" id=3]
 [ext_resource path="res://assets/panel.png" type="Texture" id=4]
 
-[sub_resource type="StyleBoxTexture" id=5]
+[sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 1024, 600 )
 
@@ -50,7 +50,7 @@ margin_left = -360.5
 margin_top = -227.995
 margin_right = 360.5
 margin_bottom = 236.005
-custom_styles/panel = SubResource( 5 )
+custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false

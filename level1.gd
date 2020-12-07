@@ -3,9 +3,9 @@ extends Node
 var clicked = false
 var sceneClass = load("res://Block.tscn")
 
-export var star1thresh = 0
-export var star2thresh = 0
-export var star3thresh = 0
+export var star1thresh = 100
+export var star2thresh = 200
+export var star3thresh = 300
 
 signal level_complete(score, stars)
 
